@@ -9,6 +9,7 @@ module.exports = async (client) => {
     const gtw = '785241282452258867'
     const capricorns = '785253209664389120'
     const szachmat = '881622054443565057'
+    const novaspedition = '881624846331707492'
 
     channel.messages.fetch().then((messages) => {
         if(messages.size === 0){
@@ -23,6 +24,7 @@ module.exports = async (client) => {
                     {name: `GTW Logistic`, value: `${gtw}`},
                     {name: `Capricorns`, value: `${capricorns}`},
                     {name: `SzachMat`, value: `${szachmat}`},
+                    {name: `Nova Spedition`, value: `${novaspedition}`},
                 )
                 .setTimestamp()
                 .setFooter(client.user.username, client.user.displayAvatarURL())
@@ -40,6 +42,7 @@ module.exports = async (client) => {
                         {name: `GTW Logistic`, value: `${gtw}`},
                         {name: `Capricorns`, value: `${capricorns}`},
                         {name: `SzachMat`, value: `${szachmat}`},
+                        {name: `Nova Spedition`, value: `${novaspedition}`},
                     )
                     .setTimestamp()
                     .setFooter(client.user.username, client.user.displayAvatarURL())
