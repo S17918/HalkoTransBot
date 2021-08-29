@@ -7,10 +7,8 @@ module.exports = async (client) => {
     const HalkoTrans = '784178682998030396'
     const tiktak = '785240835133407242'
     const gtw = '785241282452258867'
-    const skopelos = '785242572787941397'
     const capricorns = '785253209664389120'
-    const panda = '785255460940021771'
-    const support = '786331749264392224'
+    const szachmat = '881622054443565057'
 
     channel.messages.fetch().then((messages) => {
         if(messages.size === 0){
@@ -23,9 +21,8 @@ module.exports = async (client) => {
                     {name: `HalkoTrans Logistics`, value: `${HalkoTrans}`},
                     {name: `TicTac Logistics`, value: `${tiktak}`},
                     {name: `GTW Logistic`, value: `${gtw}`},
-                    {name: `Skopelos Transport`, value: `${skopelos}`},
                     {name: `Capricorns`, value: `${capricorns}`},
-                    {name: `Panda Spedition`, value: `${panda}`},
+                    {name: `SzachMat`, value: `${szachmat}`},
                 )
                 .setTimestamp()
                 .setFooter(client.user.username, client.user.displayAvatarURL())
@@ -41,10 +38,8 @@ module.exports = async (client) => {
                         {name: `HalkoTrans Logistics`, value: `${HalkoTrans}`},
                         {name: `TicTac Logistics`, value: `${tiktak}`},
                         {name: `GTW Logistic`, value: `${gtw}`},
-                        {name: `Skopelos Transport`, value: `${skopelos}`},
                         {name: `Capricorns`, value: `${capricorns}`},
-                        {name: `Panda Spedition`, value: `${panda}`},
-                        {name: `Support VIP`, value: `${support}`},
+                        {name: `SzachMat`, value: `${szachmat}`},
                     )
                     .setTimestamp()
                     .setFooter(client.user.username, client.user.displayAvatarURL())
