@@ -341,10 +341,10 @@ client.on('ready', () =>{
     
     }
 
-    const editMessageProducent = (channel, scania, volvo, daf, iveco, man, mercedes, renault) => {
+    const editMessageProducent = (channel, scania, volvo, daf, man, mercedes) => {
         let producent = ``
 
-        var masterArry = [scania, volvo, daf, iveco, man, mercedes, renault]     
+        var masterArry = [scania, volvo, daf, man, mercedes]     
 
         var maxArrSingle = function(arr) {
             return arr.reduce(
@@ -373,10 +373,8 @@ client.on('ready', () =>{
                 if(index[0] === 0) { producent = `${emoji_scania} Scania\n\n` }
                 if(index[0] === 1) { producent = `${emoji_volvo} Volvo\n\n` }
                 if(index[0] === 2) { producent = `${emoji_daf} Daf\n\n` }
-                if(index[0] === 3) { producent = `${emoji_iveco} Iveco\n\n` }
-                if(index[0] === 4) { producent = `${emoji_man} Man\n\n` }
-                if(index[0] === 5) { producent = `${emoji_mercedes} Mercedes\n\n` }
-                if(index[0] === 6) { producent = `${emoji_renault} Renault\n\n` }
+                if(index[0] === 3) { producent = `${emoji_man} Man\n\n` }
+                if(index[0] === 4) { producent = `${emoji_mercedes} Mercedes\n\n` }
             } else {
                 producent = `${emoji_error} Nie udało się wybrać ciężarówki\n\n`
             }
@@ -481,7 +479,7 @@ client.on('ready', () =>{
                     }
                 })
                 scania_final = scania_list
-                editMessageProducent(channel, scania_final, volvo_final, daf_final, iveco_final, man_final, mercedes_final, renault_final)
+                editMessageProducent(channel, scania_final, volvo_final, daf_final, man_final, mercedes_final)
                 scania_list = []
             }
         })
@@ -507,7 +505,7 @@ client.on('ready', () =>{
                     }
                 })
                 volvo_final = volvo_list
-                editMessageProducent(channel, scania_final, volvo_final, daf_final, iveco_final, man_final, mercedes_final, renault_final)
+                editMessageProducent(channel, scania_final, volvo_final, daf_final, man_final, mercedes_final)
                 volvo_list = []
             }
         })
@@ -533,7 +531,7 @@ client.on('ready', () =>{
                     }
                 })
                 daf_final = daf_list
-                editMessageProducent(channel, scania_final, volvo_final, daf_final, iveco_final, man_final, mercedes_final, renault_final)
+                editMessageProducent(channel, scania_final, volvo_final, daf_final, man_final, mercedes_final)
                 daf_list = []
             }
         })
@@ -559,7 +557,7 @@ client.on('ready', () =>{
                     }
                 })
                 iveco_final = iveco_list
-                editMessageProducent(channel, scania_final, volvo_final, daf_final, iveco_final, man_final, mercedes_final, renault_final)
+                editMessageProducent(channel, scania_final, volvo_final, daf_final, man_final, mercedes_final)
                 daf_list = []
             }
         })
@@ -585,7 +583,7 @@ client.on('ready', () =>{
                     }
                 })
                 man_final = man_list
-                editMessageProducent(channel, scania_final, volvo_final, daf_final, iveco_final, man_final, mercedes_final, renault_final)
+                editMessageProducent(channel, scania_final, volvo_final, daf_final, man_final, mercedes_final)
                 man_list = []
             }
         })
@@ -611,7 +609,7 @@ client.on('ready', () =>{
                     }
                 })
                 mercedes_final = mercedes_list
-                editMessageProducent(channel, scania_final, volvo_final, daf_final, iveco_final, man_final, mercedes_final, renault_final)
+                editMessageProducent(channel, scania_final, volvo_final, daf_final, man_final, mercedes_final)
                 mercedes_list = []
             }
         })
@@ -637,7 +635,7 @@ client.on('ready', () =>{
                     }
                 })
                 renault_final = renault_list
-                editMessageProducent(channel, scania_final, volvo_final, daf_final, iveco_final, man_final, mercedes_final, renault_final)
+                editMessageProducent(channel, scania_final, volvo_final, daf_final, man_final, mercedes_final)
                 renault_list = []
             }
         })
@@ -650,20 +648,20 @@ client.on('ready', () =>{
             checkScaniaEmoji(reaction)
             checkVolvoEmoji(reaction)
             checkDafEmoji(reaction)
-            checkIvecoEmoji(reaction)
+            // checkIvecoEmoji(reaction)
             checkManEmoji(reaction)
             checkMercedesEmoji(reaction)
-            checkRenaultEmoji(reaction)
+            // checkRenaultEmoji(reaction)
             //checkPilotEmoji(reaction)
         }else{
             checkTruckEmoji(reaction)
             checkScaniaEmoji(reaction)
             checkVolvoEmoji(reaction)
             checkDafEmoji(reaction)
-            checkIvecoEmoji(reaction)
+            // checkIvecoEmoji(reaction)
             checkManEmoji(reaction)
             checkMercedesEmoji(reaction)
-            checkRenaultEmoji(reaction)
+            // checkRenaultEmoji(reaction)
             //checkPilotEmoji(reaction)
         }
     })
@@ -675,20 +673,20 @@ client.on('ready', () =>{
             checkScaniaEmoji(reaction)
             checkVolvoEmoji(reaction)
             checkDafEmoji(reaction)
-            checkIvecoEmoji(reaction)
+            // checkIvecoEmoji(reaction)
             checkManEmoji(reaction)
             checkMercedesEmoji(reaction)
-            checkRenaultEmoji(reaction)
+            // checkRenaultEmoji(reaction)
             // checkPilotEmoji(reaction)
         }else{
             checkTruckEmoji(reaction)
             checkScaniaEmoji(reaction)
             checkVolvoEmoji(reaction)
             checkDafEmoji(reaction)
-            checkIvecoEmoji(reaction)
+            // checkIvecoEmoji(reaction)
             checkManEmoji(reaction)
             checkMercedesEmoji(reaction)
-            checkRenaultEmoji(reaction)
+            // checkRenaultEmoji(reaction)
             //checkPilotEmoji(reaction)
         }
     })
@@ -706,7 +704,7 @@ client.on('ready', () =>{
 
         let react = [emoji_truck] //emoji_pilot
 
-        let react_prod = [emoji_scania, emoji_volvo, emoji_daf, emoji_iveco, emoji_man, emoji_mercedes, emoji_renault]
+        let react_prod = [emoji_scania, emoji_volvo, emoji_daf, emoji_man, emoji_mercedes]
 
         let embed_prod = new Discord.MessageEmbed()
         .setColor('#00c3ff')
@@ -741,7 +739,7 @@ client.on('ready', () =>{
     command(client, 'ciezarowka', message => {
         message.delete({timeout: 100})
 
-        let react = [emoji_scania, emoji_volvo, emoji_daf, emoji_iveco, emoji_man, emoji_mercedes, emoji_renault]
+        let react = [emoji_scania, emoji_volvo, emoji_daf, emoji_man, emoji_mercedes]
 
         let embed = new Discord.MessageEmbed()
         .setColor('#00c3ff')
