@@ -341,10 +341,10 @@ client.on('ready', () =>{
     
     }
 
-    const editMessageProducent = (channel, scania, volvo, man, mercedes) => {
+    const editMessageProducent = (channel, scania, volvo, daf, iveco, man, mercedes, renault) => {
         let producent = ``
 
-        var masterArry = [scania, volvo, man, mercedes]     
+        var masterArry = [scania, volvo, daf, iveco, man, mercedes, renualt]     
 
         var maxArrSingle = function(arr) {
             return arr.reduce(
@@ -372,8 +372,11 @@ client.on('ready', () =>{
             if(index.length === 1 ){
                 if(index[0] === 0) { producent = `${emoji_scania} Scania\n\n` }
                 if(index[0] === 1) { producent = `${emoji_volvo} Volvo\n\n` }
-                if(index[0] === 2) { producent = `${emoji_man} Man\n\n` }
-                if(index[0] === 3) { producent = `${emoji_mercedes} Mercedes\n\n` }
+                if(index[0] === 2) { producent = `${emoji_daf} Daf\n\n` }
+                if(index[0] === 3) { producent = `${emoji_iveco} Iveco\n\n` }
+                if(index[0] === 4) { producent = `${emoji_man} Man\n\n` }
+                if(index[0] === 5) { producent = `${emoji_mercedes} Mercedes\n\n` }
+                if(index[0] === 6) { producent = `${emoji_renault} Renault\n\n` }
             } else {
                 producent = `${emoji_error} Nie udało się wybrać ciężarówki\n\n`
             }
@@ -478,7 +481,7 @@ client.on('ready', () =>{
                     }
                 })
                 scania_final = scania_list
-                editMessageProducent(channel, scania_final, volvo_final, man_final,  mercedes_final)
+                editMessageProducent(channel, scania_final, volvo_final, daf_final, iveco_final, man_final, mercedes_final, renault_final)
                 scania_list = []
             }
         })
@@ -504,7 +507,7 @@ client.on('ready', () =>{
                     }
                 })
                 volvo_final = volvo_list
-                editMessageProducent(channel, scania_final, volvo_final, man_final,  mercedes_final)
+                editMessageProducent(channel, scania_final, volvo_final, daf_final, iveco_final, man_final, mercedes_final, renault_final)
                 volvo_list = []
             }
         })
@@ -530,7 +533,7 @@ client.on('ready', () =>{
                     }
                 })
                 daf_final = daf_list
-                editMessageProducent(channel, scania_final, volvo_final, man_final,  mercedes_final)
+                editMessageProducent(channel, scania_final, volvo_final, daf_final, iveco_final, man_final, mercedes_final, renault_final)
                 daf_list = []
             }
         })
@@ -556,7 +559,7 @@ client.on('ready', () =>{
                     }
                 })
                 iveco_final = iveco_list
-                editMessageProducent(channel, scania_final, volvo_final, man_final,  mercedes_final)
+                editMessageProducent(channel, scania_final, volvo_final, daf_final, iveco_final, man_final, mercedes_final, renault_final)
                 daf_list = []
             }
         })
@@ -582,7 +585,7 @@ client.on('ready', () =>{
                     }
                 })
                 man_final = man_list
-                editMessageProducent(channel, scania_final, volvo_final, man_final,  mercedes_final)
+                editMessageProducent(channel, scania_final, volvo_final, daf_final, iveco_final, man_final, mercedes_final, renault_final)
                 man_list = []
             }
         })
@@ -608,7 +611,7 @@ client.on('ready', () =>{
                     }
                 })
                 mercedes_final = mercedes_list
-                editMessageProducent(channel, scania_final, volvo_final, man_final,  mercedes_final)
+                editMessageProducent(channel, scania_final, volvo_final, daf_final, iveco_final, man_final, mercedes_final, renault_final)
                 mercedes_list = []
             }
         })
@@ -634,7 +637,7 @@ client.on('ready', () =>{
                     }
                 })
                 renault_final = renault_list
-                editMessageProducent(channel, scania_final, volvo_final, man_final,  mercedes_final)
+                editMessageProducent(channel, scania_final, volvo_final, daf_final, iveco_final, man_final, mercedes_final, renault_final)
                 renault_list = []
             }
         })
@@ -646,21 +649,21 @@ client.on('ready', () =>{
             checkTruckEmoji(reaction)
             checkScaniaEmoji(reaction)
             checkVolvoEmoji(reaction)
-            //checkDafEmoji(reaction)
-            //checkIvecoEmoji(reaction)
+            checkDafEmoji(reaction)
+            checkIvecoEmoji(reaction)
             checkManEmoji(reaction)
             checkMercedesEmoji(reaction)
-            //checkRenaultEmoji(reaction)
+            checkRenaultEmoji(reaction)
             //checkPilotEmoji(reaction)
         }else{
             checkTruckEmoji(reaction)
             checkScaniaEmoji(reaction)
             checkVolvoEmoji(reaction)
-            //checkDafEmoji(reaction)
-            //checkIvecoEmoji(reaction)
+            checkDafEmoji(reaction)
+            checkIvecoEmoji(reaction)
             checkManEmoji(reaction)
             checkMercedesEmoji(reaction)
-            //checkRenaultEmoji(reaction)
+            checkRenaultEmoji(reaction)
             //checkPilotEmoji(reaction)
         }
     })
@@ -671,21 +674,21 @@ client.on('ready', () =>{
             checkTruckEmoji(reaction)
             checkScaniaEmoji(reaction)
             checkVolvoEmoji(reaction)
-            //checkDafEmoji(reaction)
-            //checkIvecoEmoji(reaction)
+            checkDafEmoji(reaction)
+            checkIvecoEmoji(reaction)
             checkManEmoji(reaction)
             checkMercedesEmoji(reaction)
-            //checkRenaultEmoji(reaction)
-            //checkPilotEmoji(reaction)
+            checkRenaultEmoji(reaction)
+            // checkPilotEmoji(reaction)
         }else{
             checkTruckEmoji(reaction)
             checkScaniaEmoji(reaction)
             checkVolvoEmoji(reaction)
-            //checkDafEmoji(reaction)
-            //checkIvecoEmoji(reaction)
+            checkDafEmoji(reaction)
+            checkIvecoEmoji(reaction)
             checkManEmoji(reaction)
             checkMercedesEmoji(reaction)
-            //checkRenaultEmoji(reaction)
+            checkRenaultEmoji(reaction)
             //checkPilotEmoji(reaction)
         }
     })
