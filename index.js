@@ -55,9 +55,33 @@ client.on('ready', () =>{
     let users_drivers = []
     let users_pilots = []
 
+    let scania_list = []
+    let scania_final = []
+    let volvo_list = []
+    let volvo_final = []
+    let daf_list = []
+    let daf_final = []
+    let iveco_list = []
+    let iveco_final = []
+    let man_list = []
+    let man_final = []
+    let mercedes_list = []
+    let mercedes_final = []
+    let renault_list = []
+    let renault_final = []
 
     const emoji_pilot = client.emojis.cache.find(emoji => emoji.name === 'Pilot')
     const emoji_truck = client.emojis.cache.find(emoji => emoji.name === 'Truck')
+
+    const emoji_mercedes = client.emojis.cache.find(emoji => emoji.name === 'Mercedes')
+    const emoji_renault = client.emojis.cache.find(emoji => emoji.name === 'Renault')
+    const emoji_scania = client.emojis.cache.find(emoji => emoji.name === 'Scania')
+    const emoji_volvo = client.emojis.cache.find(emoji => emoji.name === 'Volvo')
+    const emoji_man = client.emojis.cache.find(emoji => emoji.name === 'Man')
+    const emoji_iveco = client.emojis.cache.find(emoji => emoji.name === 'Iveco')
+    const emoji_daf = client.emojis.cache.find(emoji => emoji.name === 'Daf')
+
+    const emoji_error = client.emojis.cache.find(emoji => emoji.name === "Error")
 
     command(client, 'ping', message_ =>{
         ping(client, message_)
@@ -303,10 +327,9 @@ client.on('ready', () =>{
         }
     })
 
-    const editMessage = (pilots, drivers, channel) => {
-        channel.messages.fetch({limit: 1}).then((messages) => {
+    const editMessageConvoyUsers = (pilots, drivers, channel) => {
+        channel.messages.fetch({limit:2}).then((messages) => {
             let message = messages.first()
-    
                 let embed = new Discord.MessageEmbed()
                     .setColor('#00c3ff')
                     .setTitle('Zapisy na konwój')
@@ -316,6 +339,57 @@ client.on('ready', () =>{
                 message.edit(embed)
             })
     
+    }
+
+    const editMessageProducent = (channel, scania, volvo, man, mercedes) => {
+        let producent = ``
+
+        var masterArry = [scania, volvo, man, mercedes]     
+
+        var maxArrSingle = function(arr) {
+            return arr.reduce(
+              function(acc,val){
+                return Math.max(acc,val);
+              },
+              -Infinity);
+          }
+          
+        var maxArrIndexes = function(arr) {
+            var max = maxArrSingle(arr);
+            return arr.reduce(function(acc,val,idx) {
+              if (val >= max) acc.push(idx);
+              return acc;
+            },[]);
+        }
+
+        const lengths = masterArry.map(a => a.length)
+
+        if(lengths.every(a => a === 0)){
+            producent = `${emoji_error} Brak głosów\n\n`
+        }else{
+            let index = maxArrIndexes(Array.from(lengths))
+        
+            if(index.length === 1 ){
+                if(index[0] === 0) { producent = `${emoji_scania} Scania\n\n` }
+                if(index[0] === 1) { producent = `${emoji_volvo} Volvo\n\n` }
+                if(index[0] === 2) { producent = `${emoji_man} Man\n\n` }
+                if(index[0] === 3) { producent = `${emoji_mercedes} Mercedes\n\n` }
+            } else {
+                producent = `${emoji_error} Nie udało się wybrać ciężarówki\n\n`
+            }
+        }
+
+
+        channel.messages.fetch({limit:2}).then((messages) => {
+            let message = messages.last()
+            let embed = new Discord.MessageEmbed()
+            .setColor('#00c3ff')
+            .setTitle('Wybór ciężarówki do konwoju')
+            .setDescription(`Producent ciężarówki wybrany na konwój:\n\n${producent}\n\n`)
+            .setTimestamp()
+            .setFooter(client.user.username, client.user.displayAvatarURL())
+        message.edit(embed)
+        })
     }
 
     const checkTruckEmoji = async (reaction) => {
@@ -343,7 +417,7 @@ client.on('ready', () =>{
             })
             
             drivers = users_drivers.join('\n').trim()
-            editMessage(pilots, drivers, channel)//
+            editMessageConvoyUsers(pilots, drivers, channel)
             users_drivers = []
         })
     }
@@ -379,8 +453,190 @@ client.on('ready', () =>{
                 }
             })
             pilots = users_pilots.join('\n').trim()
-            editMessage(pilots, drivers, channel)
+            editMessageConvoyUsers(pilots, drivers, channel)
             users_pilots = []
+        })
+    }
+
+    const checkScaniaEmoji = async (reaction) => {
+        const { guild } = reaction.message
+        const channel = await client.channels.fetch(reaction.message.channel.id)
+        const messageID = reaction.message.id
+        const fetchMessage = await reaction.message.channel.messages.fetch(messageID);
+        fetchMessage.reactions.cache.map(async (reaction) => {
+            if(reaction.emoji.name === "Scania"){
+                let reactedUsers = await reaction.users.fetch()
+                reactedUsers.map((user) => {
+                    if(user.id === '781188809962422323'){
+                        
+                    }else{
+                        if(scania_list.indexOf(user.id) > -1){
+                            console.log("User already voted")
+                        }else{
+                            scania_list.push(user.id)
+                        }
+                    }
+                })
+                scania_final = scania_list
+                editMessageProducent(channel, scania_final, volvo_final, man_final,  mercedes_final)
+                scania_list = []
+            }
+        })
+    }
+
+    const checkVolvoEmoji = async (reaction) => {
+        const { guild } = reaction.message
+        const channel = await client.channels.fetch(reaction.message.channel.id)
+        const messageID = reaction.message.id
+        const fetchMessage = await reaction.message.channel.messages.fetch(messageID);
+        fetchMessage.reactions.cache.map(async (reaction) => {
+            if(reaction.emoji.name === "Volvo"){
+                let reactedUsers = await reaction.users.fetch()
+                reactedUsers.map((user) => {
+                    if(user.id === '781188809962422323'){
+
+                    }else{
+                        if(volvo_list.indexOf(user.id) > -1){
+                            console.log("User already voted")
+                        }else{
+                            volvo_list.push(user.id)
+                        }
+                    }
+                })
+                volvo_final = volvo_list
+                editMessageProducent(channel, scania_final, volvo_final, man_final,  mercedes_final)
+                volvo_list = []
+            }
+        })
+    }
+
+    const checkDafEmoji = async (reaction) => {
+        const { guild } = reaction.message
+        const channel = await client.channels.fetch(reaction.message.channel.id)
+        const messageID = reaction.message.id
+        const fetchMessage = await reaction.message.channel.messages.fetch(messageID);
+        fetchMessage.reactions.cache.map(async (reaction) => {
+            if(reaction.emoji.name === "Daf"){
+                let reactedUsers = await reaction.users.fetch()
+                reactedUsers.map((user) => {
+                    if(user.id === '781188809962422323'){
+
+                    }else{
+                        if(daf_list.indexOf(user.id) > -1){
+                            console.log("User already voted")
+                        }else{
+                            daf_list.push(user.id)
+                        }
+                    }
+                })
+                daf_final = daf_list
+                editMessageProducent(channel, scania_final, volvo_final, man_final,  mercedes_final)
+                daf_list = []
+            }
+        })
+    }
+
+    const checkIvecoEmoji = async (reaction) => {
+        const { guild } = reaction.message
+        const channel = await client.channels.fetch(reaction.message.channel.id)
+        const messageID = reaction.message.id
+        const fetchMessage = await reaction.message.channel.messages.fetch(messageID);
+        fetchMessage.reactions.cache.map(async (reaction) => {
+            if(reaction.emoji.name === "Iveco"){
+                let reactedUsers = await reaction.users.fetch()
+                reactedUsers.map((user) => {
+                    if(user.id === '781188809962422323'){
+
+                    }else{
+                        if(iveco_list.indexOf(user.id) > -1){
+                            console.log("User already voted")
+                        }else{
+                            iveco_list.push(user.id)
+                        }
+                    }
+                })
+                iveco_final = iveco_list
+                editMessageProducent(channel, scania_final, volvo_final, man_final,  mercedes_final)
+                daf_list = []
+            }
+        })
+    }
+
+    const checkManEmoji = async (reaction) => {
+        const { guild } = reaction.message
+        const channel = await client.channels.fetch(reaction.message.channel.id)
+        const messageID = reaction.message.id
+        const fetchMessage = await reaction.message.channel.messages.fetch(messageID);
+        fetchMessage.reactions.cache.map(async (reaction) => {
+            if(reaction.emoji.name === "Man"){
+                let reactedUsers = await reaction.users.fetch()
+                reactedUsers.map((user) => {
+                    if(user.id === '781188809962422323'){
+
+                    }else{
+                        if(man_list.indexOf(user.id) > -1){
+                            console.log("User already voted")
+                        }else{
+                            man_list.push(user.id)
+                        }
+                    }
+                })
+                man_final = man_list
+                editMessageProducent(channel, scania_final, volvo_final, man_final,  mercedes_final)
+                man_list = []
+            }
+        })
+    }
+
+    const checkMercedesEmoji = async (reaction) => {
+        const { guild } = reaction.message
+        const channel = await client.channels.fetch(reaction.message.channel.id)
+        const messageID = reaction.message.id
+        const fetchMessage = await reaction.message.channel.messages.fetch(messageID);
+        fetchMessage.reactions.cache.map(async (reaction) => {
+            if(reaction.emoji.name === "Mercedes"){
+                let reactedUsers = await reaction.users.fetch()
+                reactedUsers.map((user) => {
+                    if(user.id === '781188809962422323'){
+
+                    }else{
+                        if(mercedes_list.indexOf(user.id) > -1){
+                            console.log("User already voted")
+                        }else{
+                            mercedes_list.push(user.id)
+                        }
+                    }
+                })
+                mercedes_final = mercedes_list
+                editMessageProducent(channel, scania_final, volvo_final, man_final,  mercedes_final)
+                mercedes_list = []
+            }
+        })
+    }
+
+    const checkRenaultEmoji = async (reaction) => {
+        const { guild } = reaction.message
+        const channel = await client.channels.fetch(reaction.message.channel.id)
+        const messageID = reaction.message.id
+        const fetchMessage = await reaction.message.channel.messages.fetch(messageID);
+        fetchMessage.reactions.cache.map(async (reaction) => {
+            if(reaction.emoji.name === "Renault"){
+                let reactedUsers = await reaction.users.fetch()
+                reactedUsers.map((user) => {
+                    if(user.id === '781188809962422323'){
+
+                    }else{
+                        if(renault_list.indexOf(user.id) > -1){
+                            console.log("User already voted")
+                        }else{
+                            renault_list.push(user.id)
+                        }
+                    }
+                })
+                renault_final = renault_list
+                editMessageProducent(channel, scania_final, volvo_final, man_final,  mercedes_final)
+                renault_list = []
+            }
         })
     }
 
@@ -388,9 +644,23 @@ client.on('ready', () =>{
         if(reaction.message.partial){
             let msg = await reaction.message.fetch()
             checkTruckEmoji(reaction)
+            checkScaniaEmoji(reaction)
+            checkVolvoEmoji(reaction)
+            //checkDafEmoji(reaction)
+            //checkIvecoEmoji(reaction)
+            checkManEmoji(reaction)
+            checkMercedesEmoji(reaction)
+            //checkRenaultEmoji(reaction)
             //checkPilotEmoji(reaction)
         }else{
             checkTruckEmoji(reaction)
+            checkScaniaEmoji(reaction)
+            checkVolvoEmoji(reaction)
+            //checkDafEmoji(reaction)
+            //checkIvecoEmoji(reaction)
+            checkManEmoji(reaction)
+            checkMercedesEmoji(reaction)
+            //checkRenaultEmoji(reaction)
             //checkPilotEmoji(reaction)
         }
     })
@@ -399,9 +669,23 @@ client.on('ready', () =>{
         if(reaction.message.partial){
             let msg = await reaction.message.fetch()
             checkTruckEmoji(reaction)
+            checkScaniaEmoji(reaction)
+            checkVolvoEmoji(reaction)
+            //checkDafEmoji(reaction)
+            //checkIvecoEmoji(reaction)
+            checkManEmoji(reaction)
+            checkMercedesEmoji(reaction)
+            //checkRenaultEmoji(reaction)
             //checkPilotEmoji(reaction)
         }else{
             checkTruckEmoji(reaction)
+            checkScaniaEmoji(reaction)
+            checkVolvoEmoji(reaction)
+            //checkDafEmoji(reaction)
+            //checkIvecoEmoji(reaction)
+            checkManEmoji(reaction)
+            checkMercedesEmoji(reaction)
+            //checkRenaultEmoji(reaction)
             //checkPilotEmoji(reaction)
         }
     })
@@ -417,7 +701,16 @@ client.on('ready', () =>{
     command(client, 'zapisy', message => {
         message.delete({timeout: 100})
 
-        let react = [emoji_truck] //, emoji_pilot
+        let react = [emoji_truck] //emoji_pilot
+
+        let react_prod = [emoji_scania, emoji_volvo, emoji_man, emoji_mercedes] //emoji_iveco
+
+        let embed_prod = new Discord.MessageEmbed()
+        .setColor('#00c3ff')
+        .setTitle('Wybór ciężarówki do konwoju')
+        .setDescription(`Producent ciężarówki wybrany na konwój:`)
+        .setTimestamp()
+        .setFooter(client.user.username, client.user.displayAvatarURL())
 
         let embed = new Discord.MessageEmbed()
             .setColor('#00c3ff')
@@ -427,12 +720,40 @@ client.on('ready', () =>{
             .setFooter(client.user.username, client.user.displayAvatarURL())
 
             message.channel.messages.fetch().then((messages) => {
-                        message.channel.send(embed).then((message) =>{
-                            addReactions(message, react)
-                    })
+                message.channel.send(embed_prod).then((message) =>{
+                    addReactions(message, react_prod)
+                    message_producent = message
+                })
+            })
+
+            message.channel.messages.fetch().then((messages) => {
+                message.channel.send(embed).then((message) =>{
+                    addReactions(message, react)
+                })
             })
 
             id = message.channel.id
+    })
+
+    command(client, 'ciezarowka', message => {
+        message.delete({timeout: 100})
+
+        let react = [emoji_scania, emoji_volvo, emoji_man, emoji_mercedes] //emoji_iveco
+
+        let embed = new Discord.MessageEmbed()
+        .setColor('#00c3ff')
+        .setTitle('Wybór ciężarówki do konwoju')
+        .setDescription(`Producent ciężarówki wybrany na konwój:`)
+        .setTimestamp()
+        .setFooter(client.user.username, client.user.displayAvatarURL())
+
+        message.channel.messages.fetch().then((messages) => {
+                    message.channel.send(embed).then((message) =>{
+                        addReactions(message, react)
+                })
+        })
+
+        id = message.channel.id
     })
 })
 
