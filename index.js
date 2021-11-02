@@ -344,7 +344,7 @@ client.on('ready', () =>{
     const editMessageProducent = (channel, scania, volvo, daf, iveco, man, mercedes, renault) => {
         let producent = ``
 
-        var masterArry = [scania, volvo, daf, iveco, man, mercedes, renualt]     
+        var masterArry = [scania, volvo, daf, iveco, man, mercedes, renault]     
 
         var maxArrSingle = function(arr) {
             return arr.reduce(
@@ -706,7 +706,7 @@ client.on('ready', () =>{
 
         let react = [emoji_truck] //emoji_pilot
 
-        let react_prod = [emoji_scania, emoji_volvo, emoji_man, emoji_mercedes] //emoji_iveco
+        let react_prod = [emoji_scania, emoji_volvo, emoji_daf, emoji_iveco, emoji_man, emoji_mercedes, emoji_renault]
 
         let embed_prod = new Discord.MessageEmbed()
         .setColor('#00c3ff')
@@ -741,7 +741,7 @@ client.on('ready', () =>{
     command(client, 'ciezarowka', message => {
         message.delete({timeout: 100})
 
-        let react = [emoji_scania, emoji_volvo, emoji_man, emoji_mercedes] //emoji_iveco
+        let react = [emoji_scania, emoji_volvo, emoji_daf, emoji_iveco, emoji_man, emoji_mercedes, emoji_renault]
 
         let embed = new Discord.MessageEmbed()
         .setColor('#00c3ff')
