@@ -56,12 +56,20 @@ module.exports = async (client) => {
                     .setDescription('**Lista ID firm**')
                     .addFields(
                         {name: `HalkoTrans Logistics`, value: `${HalkoTrans}`},
-                        {name: `TicTac Logistics`, value: `${tiktak}`},
                         {name: `GTW Logistic`, value: `${gtw}`},
                         {name: `Capricorns`, value: `${capricorns}`},
                         {name: `SzachMat`, value: `${szachmat}`},
                         {name: `Nova Spedition`, value: `${novaspedition}`},
                         {name: `Roszada Trans`, value: `${roszadatrans}`},
+                        {name: `Lider-Logistic`, value: `${liderLogistic}`},
+                        {name: `E.T.C`, value: `${etc}`},
+                        {name: `Sharky Trans`, value: `${sharkyTrans}`},
+                        {name: `Euro Speed`, value: `${euroSpeed}`},
+                        {name: `Darkom`, value: `${darkom}`},
+                        {name: `MMS`, value: `${mms}`},
+                        {name: `Blue-Trans Spedition`, value: `${bts}`},
+                        {name: `SNG Transport & Logistics`, value: `${sngTransportLogistics}`},
+                        {name: `Polish Trans-Logistic`, value: `${polishTransLogistic}`},
                     )
                     .setTimestamp()
                     .setFooter(client.user.username, client.user.displayAvatarURL())
