@@ -330,17 +330,31 @@ client.on('ready', () =>{
     })
 
     const editMessageConvoyUsers = (pilots, drivers, channel) => {
+        var desription = ''
         channel.messages.fetch({limit:2}).then((messages) => {
+            if(drivers.length === 0 && pilots.length === 0) {
+                desription = `Kierowcy zapisani na konwój:\n\n${emoji_error} Brak zgłoszeń\n\n`
+            } else {
+                if(drivers.length != 0 && pilots.length === 0) {
+                    desription = `Kierowcy zapisani na konwój:\n\n${drivers}\n\n\n`
+                }
+                if(pilots.length != 0 && drivers.length === 0) {
+                    desription = `Kierowcy zapisani na konwój:\n\n${pilots}\n\n\n`
+                }
+                if(pilots.length != 0 && drivers.length != 0) {
+                    desription = `Kierowcy zapisani na konwój\n\n**Piloci:**\n\n${pilots}\n\n**Kierowcy:**\n\n${drivers}\n\n\n`
+                }
+            }
+
             let message = messages.first()
                 let embed = new Discord.MessageEmbed()
                     .setColor('#00c3ff')
                     .setTitle('Zapisy na konwój')
-                    .setDescription(`Kierowcy zapisani na konwój\n\n${drivers}\n\n${pilots}\n`)
+                    .setDescription(desription)
                     .setTimestamp()
                     .setFooter(client.user.username, client.user.displayAvatarURL())
                 message.edit(embed)
             })
-    
     }
 
     const editMessageProducent = (channel, scania, volvo, daf, man, mercedes) => {
@@ -411,10 +425,9 @@ client.on('ready', () =>{
                 }else{
                     const member = guild.members.cache.find(member => member.id === user.id)
                     if(pilots.indexOf(`${emoji_pilot} <@${user.id}>`) > -1){
-                        console.log("User already signed for convoy")
+                        reaction.users.remove(user.id)
                     }else{
                         users_drivers.push(`${emoji_truck} <@${user.id}>`)
-
                     }
                 }
             })
@@ -441,16 +454,14 @@ client.on('ready', () =>{
                 }else{
                     const member = guild.members.cache.find(member => member.id === user.id)
                     if(drivers.indexOf(`${emoji_truck} <@${user.id}>`) > -1){
-                        console.log("User already signed for convoy")
+                        reaction.users.remove(user.id)
                     }else{
                         if(member.roles.cache.some(role => role.name === 'PILOT') === true){
-                            if(users_pilots.length < 10){
+                            if(users_pilots.length < 3){
                                 users_pilots.push(`${emoji_pilot} <@${user.id}>`)
-                            }else{
-                                if(users_pilots.length > 2) return;
                             }
                         }else{
-                            console.log("Does not have Pilot rank")
+                            reaction.users.remove(user.id)
                         }
                     }
                 }
@@ -647,6 +658,7 @@ client.on('ready', () =>{
         if(reaction.message.partial){
             let msg = await reaction.message.fetch()
             checkTruckEmoji(reaction)
+            checkPilotEmoji(reaction)
             checkScaniaEmoji(reaction)
             checkVolvoEmoji(reaction)
             checkDafEmoji(reaction)
@@ -657,6 +669,7 @@ client.on('ready', () =>{
             //checkPilotEmoji(reaction)
         }else{
             checkTruckEmoji(reaction)
+            checkPilotEmoji(reaction)
             checkScaniaEmoji(reaction)
             checkVolvoEmoji(reaction)
             checkDafEmoji(reaction)
@@ -672,6 +685,7 @@ client.on('ready', () =>{
         if(reaction.message.partial){
             let msg = await reaction.message.fetch()
             checkTruckEmoji(reaction)
+            checkPilotEmoji(reaction)
             checkScaniaEmoji(reaction)
             checkVolvoEmoji(reaction)
             checkDafEmoji(reaction)
@@ -682,6 +696,7 @@ client.on('ready', () =>{
             // checkPilotEmoji(reaction)
         }else{
             checkTruckEmoji(reaction)
+            checkPilotEmoji(reaction)
             checkScaniaEmoji(reaction)
             checkVolvoEmoji(reaction)
             checkDafEmoji(reaction)
@@ -704,7 +719,7 @@ client.on('ready', () =>{
     command(client, 'zapisy', message => {
         message.delete({timeout: 100})
 
-        let react = [emoji_truck] //emoji_pilot
+        let react = [emoji_truck, emoji_pilot]
 
         let react_prod = [emoji_scania, emoji_volvo, emoji_daf, emoji_man, emoji_mercedes]
 
