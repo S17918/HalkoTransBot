@@ -52,6 +52,9 @@ client.on('ready', () =>{
     var convoy_organizator = '\u200B'
     var convoy_map = '\u200B'
 
+    var first_pilot = null
+    var second_pilot = null
+
     let drivers = []
     let pilots = []
     let users_drivers = []
@@ -443,12 +446,23 @@ client.on('ready', () =>{
         const channel = await client.channels.fetch(reaction.message.channel.id)
         const messageID = reaction.message.id
         const fetchMessage = await reaction.message.channel.messages.fetch(messageID);
-        let reactions = fetchMessage.reactions.cache.find(emoji => emoji.emoji.name === "Truck")
+        let reactions = fetchMessage.reactions.cache.find(emoji => emoji.emoji.name === "Pilot")
         fetchMessage.reactions.cache.map(async (reaction) => {
             if(reaction.emoji.name !== "Pilot") return;
             let reactedUsers = await reaction.users.fetch()
 
             reactedUsers.map((user) =>{
+                if(first_pilot != null && first_pilot.includes(user.id)){
+                    first_pilot = null
+                }
+                if(second_pilot != null && second_pilot.includes(user.id)){
+                    second_pilot = null
+                }
+                if(first_pilot != null && second_pilot != null) {
+                    if(user.id != '781188809962422323'){
+                        reaction.users.remove(user.id)
+                    }
+                }
                 if(user.id === '781188809962422323'){
 
                 }else{
@@ -457,16 +471,22 @@ client.on('ready', () =>{
                         reaction.users.remove(user.id)
                     }else{
                         if(member.roles.cache.some(role => role.name === 'PILOT') === true){
-                            if(users_pilots.length < 3){
-                                users_pilots.push(`${emoji_pilot} <@${user.id}>`)
+                            value = `${emoji_pilot} <@${user.id}>`
+                            if(first_pilot === null) {
+                                first_pilot = value
+                            } else if(first_pilot != null && second_pilot === null) {
+                                if(first_pilot != value){
+                                    second_pilot = value
+                                }
                             }
-                        }else{
+ 
+                        } else {
                             reaction.users.remove(user.id)
                         }
-                    }
-                }
+                    }                
+               }
             })
-            pilots = users_pilots.join('\n').trim()
+            pilots = [first_pilot, second_pilot].join('\n').trim()
             editMessageConvoyUsers(pilots, drivers, channel)
             users_pilots = []
         })
@@ -697,6 +717,12 @@ client.on('ready', () =>{
         }else{
             checkTruckEmoji(reaction)
             checkPilotEmoji(reaction)
+            if(first_pilot != null && first_pilot.includes(user.id)){
+                first_pilot = null
+            }
+            if(second_pilot != null && second_pilot.includes(user.id)){
+                second_pilot = null
+            }
             checkScaniaEmoji(reaction)
             checkVolvoEmoji(reaction)
             checkDafEmoji(reaction)
