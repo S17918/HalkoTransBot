@@ -2,21 +2,35 @@ const Discord = require('discord.js')
 const embedMessage = require('../embeds/roles_embed_message')
 
 module.exports = client => {
-    const channelID = '784174904999542874'
+    const channelID = '945728058663514182'
 
     const getEmoji = emojiName => client.emojis.cache.find(emoji => emoji.name === emojiName)
     const emojis = {
-        Recruit: "KANDYDAT",
-        Cowork: "PRZEDSTAWICIEL FIRMY",
-        BlobPepe: "GOŚĆ",
+        ets2: "Euro Truck Simulator 2",
+        ats: "American Truck Simulator",
+        GoingEast: "GOING EAST",
+        Scandinavia: "SCANDINAVIA",
+        ViveLaFrance: "VIVE LA FRANCE",
+        Italia: "ITALIA",
+        BalticSea: "BEYOND THE BALTIC SEA",
+        BlackSea: "ROAD TO THE BLACK SEA",
+        Iberia: "IBERIA",
+        ProMods: "ProMods",
+        Mouse: "MYSZKA",
+        Keyboard: "KLAWIATURA",
+        SteeringWheel: "KIEROWNICA",
+        Pad: "PAD",
+        Twitch: "Twitch",
+        YouTube: "YouTube"
     }
 
-    const names = ['Rekrutacja\n*Dostęp do kanałów rekrutacji*', 'Współpraca\n*Dostęp do kanałów współpracy*', 'Gość\n*Dostęp do kanałów ogólnych*\n\u200B']
+    const names = ['Euro Truck Simulator 2', 'American Truck Simulator\n\n\n\n**DODATKI**', 'Going East', 'Scandinavia', 'Vive La France', 'Italia', 'Beyond the Baltic Sea', 'Road to the Black Sea', 'Iberia', 'ProMods\n\n\n\n**KONTROLERY**','Myszka', 'Klawiatura', 'Kierownica', 'Pad\n\n\n\n**STREAMING**','Twitch', 'YouTube\n\u200B']
+
     const reactions = []
     var x = 0
 
     let Title = 'HalkoTrans Logistics\n'
-    let Text = 'Odpowiednie rangi zostaną nadane po dodaniu reakcji pod tą wiadomością\n\n\n**POWÓD WIZYTY**\n\n'
+    let Text = 'Odpowiednie rangi zostaną nadane po dodaniu reakcji pod tą wiadomością\n\n\n**GRY**\n\n'
     for (const key in emojis){
         const emoji = getEmoji(key)
         reactions.push(emoji)

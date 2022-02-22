@@ -5,6 +5,7 @@ const config = require('./config.json')
 
 const command = require('./source/command')
 const roleClaim = require('./source/role_claim')
+const roleClaimAdditional = require('./source/role_claim_additional')
 
 const welcome = require('./embeds/welcome_embed_message')
 const discord_entry_log = require('./embeds/discord_log_embed_message')
@@ -28,6 +29,7 @@ client.on('ready', () =>{
     console.log('Client is ready !')
 
     roleClaim(client)
+    roleClaimAdditional(client)
     welcome(client)
     discord_entry_log(client)
     discord_rules(client)
