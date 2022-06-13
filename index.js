@@ -313,7 +313,7 @@ client.on('ready', () =>{
         }
     })
 
-    command(client, 'clearConvoyData', message =>{
+    command(client, ['clearConvoyData', 'ccd'], message =>{
         message.delete({timeout: 100})
         if(message.member.hasPermission('ADMINISTRATOR')){
             convoy_title = '\u200B'
