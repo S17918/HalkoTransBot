@@ -265,7 +265,7 @@ client.on('ready', () =>{
                 dlcs.push(`<@&784761221576261652>`)
                 dlcs.push(`<@&784760036219813898>`)
                 dlcs.push(`<@&784761348050649119>`)
-                dlcs.push(`<@&$784761420419563570>`)
+                dlcs.push(`<@&784761420419563570>`)
                 dlcs.push(`<@&784843270802767922>`)
 
                 const channel = client.channels.cache.get(message.channel.id)
