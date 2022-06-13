@@ -259,14 +259,14 @@ client.on('ready', () =>{
             if(message === ''){
                 console.log('Empty message')
             }else{
-                dlcs.push(`<@&${784758875303575573}>`)
-                dlcs.push(`<@&${784761300949270539}>`)
-                dlcs.push(`<@&${784761165401030686}>`)
-                dlcs.push(`<@&${784761221576261652}>`)
-                dlcs.push(`<@&${784760036219813898}>`)
-                dlcs.push(`<@&${784761348050649119}>`)
-                dlcs.push(`<@&${784761420419563570}>`)
-                dlcs.push(`<@&${784843270802767922}>`)
+                dlcs.push(`<@&784758875303575573>`)
+                dlcs.push(`<@&784761300949270539>`)
+                dlcs.push(`<@&784761165401030686>`)
+                dlcs.push(`<@&784761221576261652>`)
+                dlcs.push(`<@&784760036219813898>`)
+                dlcs.push(`<@&784761348050649119>`)
+                dlcs.push(`<@&$784761420419563570>`)
+                dlcs.push(`<@&784843270802767922>`)
 
                 const channel = client.channels.cache.get(message.channel.id)
                 channel.send(`DLC wymagane do wzięcia udziału - ${dlcs}`)
