@@ -19,6 +19,9 @@ module.exports = async (client) => {
     const bts = '905202106108096612'
     const sngTransportLogistics = '905201356728598538'
     const polishTransLogistic = '892111606614470677'
+    const werlukTrans = '960616194912686161'
+    const bbatsVs = '945032428270026864'
+    const vikingTransport = '968941070064951337'
 
     channel.messages.fetch().then((messages) => {
         if(messages.size === 0){
@@ -43,6 +46,9 @@ module.exports = async (client) => {
                     {name: `Blue-Trans Spedition`, value: `${bts}`},
                     {name: `SNG Transport & Logistics`, value: `${sngTransportLogistics}`},
                     {name: `Polish Trans-Logistic`, value: `${polishTransLogistic}`},
+                    {name: `Werluk-Trans`, value: `${werlukTrans}`},
+                    {name: `BBATS VS`, value: `${bbatsVs}`},
+                    {name: `Viking-Transport`, value: `${vikingTransport}`},
                 )
                 .setTimestamp()
                 .setFooter(client.user.username, client.user.displayAvatarURL())
@@ -70,6 +76,9 @@ module.exports = async (client) => {
                         {name: `Blue-Trans Spedition`, value: `${bts}`},
                         {name: `SNG Transport & Logistics`, value: `${sngTransportLogistics}`},
                         {name: `Polish Trans-Logistic`, value: `${polishTransLogistic}`},
+                        {name: `Werluk-Trans`, value: `${werlukTrans}`},
+                        {name: `BBATS VS`, value: `${bbatsVs}`},
+                        {name: `Viking-Transport`, value: `${vikingTransport}`},
                     )
                     .setTimestamp()
                     .setFooter(client.user.username, client.user.displayAvatarURL())

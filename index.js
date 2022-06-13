@@ -253,6 +253,31 @@ client.on('ready', () =>{
         }
     })
 
+    command(client, 'addALLDLC', message =>{
+        message.delete({timeout: 100})
+        if(message.member.hasPermission('ADMINISTRATOR')){
+            if(message === ''){
+                console.log('Empty message')
+            }else{
+                dlcs.push('784758875303575573')
+                dlcs.push('784761300949270539')
+                dlcs.push('784761165401030686')
+                dlcs.push('784761221576261652')
+                dlcs.push('784760036219813898')
+                dlcs.push('784761348050649119')
+                dlcs.push('784761420419563570')
+                dlcs.push('784843270802767922')
+        
+                const channel = client.channels.cache.get(message.channel.id)
+                channel.send(`DLC wymagane do wzięcia udziału - ${dlcs}`)
+            }
+        }else{
+            message.channel.send('You cannot do that !').then(msg => {
+                msg.delete({timeout: 4000})
+            })
+        }
+    })
+
     command(client, 'setOrganizator', message =>{
         message.delete({timeout: 100})
         if(message.member.hasPermission('ADMINISTRATOR')){
@@ -512,7 +537,7 @@ client.on('ready', () =>{
                     }
                 })
                 scania_final = scania_list
-                editMessageProducent(channel, scania_final, volvo_final, daf_final, man_final, mercedes_final)
+                editMessageProducent(channel, scania_final, volvo_final, daf_final, man_final, mercedes_final, renault_final)
                 scania_list = []
             }
         })
@@ -538,7 +563,7 @@ client.on('ready', () =>{
                     }
                 })
                 volvo_final = volvo_list
-                editMessageProducent(channel, scania_final, volvo_final, daf_final, man_final, mercedes_final)
+                editMessageProducent(channel, scania_final, volvo_final, daf_final, man_final, mercedes_final, renault_final)
                 volvo_list = []
             }
         })
@@ -564,7 +589,7 @@ client.on('ready', () =>{
                     }
                 })
                 daf_final = daf_list
-                editMessageProducent(channel, scania_final, volvo_final, daf_final, man_final, mercedes_final)
+                editMessageProducent(channel, scania_final, volvo_final, daf_final, man_final, mercedes_final, renault_final)
                 daf_list = []
             }
         })
@@ -590,7 +615,7 @@ client.on('ready', () =>{
                     }
                 })
                 iveco_final = iveco_list
-                editMessageProducent(channel, scania_final, volvo_final, daf_final, man_final, mercedes_final)
+                editMessageProducent(channel, scania_final, volvo_final, daf_final, man_final, mercedes_final, renault_final)
                 daf_list = []
             }
         })
@@ -616,7 +641,7 @@ client.on('ready', () =>{
                     }
                 })
                 man_final = man_list
-                editMessageProducent(channel, scania_final, volvo_final, daf_final, man_final, mercedes_final)
+                editMessageProducent(channel, scania_final, volvo_final, daf_final, man_final, mercedes_final, renault_final)
                 man_list = []
             }
         })
@@ -642,7 +667,7 @@ client.on('ready', () =>{
                     }
                 })
                 mercedes_final = mercedes_list
-                editMessageProducent(channel, scania_final, volvo_final, daf_final, man_final, mercedes_final)
+                editMessageProducent(channel, scania_final, volvo_final, daf_final, man_final, mercedes_final, renault_final)
                 mercedes_list = []
             }
         })
@@ -668,7 +693,7 @@ client.on('ready', () =>{
                     }
                 })
                 renault_final = renault_list
-                editMessageProducent(channel, scania_final, volvo_final, daf_final, man_final, mercedes_final)
+                editMessageProducent(channel, scania_final, volvo_final, daf_final, man_final, mercedes_final, renault_final)
                 renault_list = []
             }
         })
@@ -685,8 +710,7 @@ client.on('ready', () =>{
             // checkIvecoEmoji(reaction)
             checkManEmoji(reaction)
             checkMercedesEmoji(reaction)
-            // checkRenaultEmoji(reaction)
-            //checkPilotEmoji(reaction)
+            checkRenaultEmoji(reaction)
         }else{
             checkTruckEmoji(reaction)
             checkPilotEmoji(reaction)
@@ -696,8 +720,7 @@ client.on('ready', () =>{
             // checkIvecoEmoji(reaction)
             checkManEmoji(reaction)
             checkMercedesEmoji(reaction)
-            // checkRenaultEmoji(reaction)
-            //checkPilotEmoji(reaction)
+            checkRenaultEmoji(reaction)
         }
     })
 
@@ -712,8 +735,7 @@ client.on('ready', () =>{
             // checkIvecoEmoji(reaction)
             checkManEmoji(reaction)
             checkMercedesEmoji(reaction)
-            // checkRenaultEmoji(reaction)
-            // checkPilotEmoji(reaction)
+            checkRenaultEmoji(reaction)
         }else{
             checkTruckEmoji(reaction)
             checkPilotEmoji(reaction)
@@ -729,8 +751,7 @@ client.on('ready', () =>{
             // checkIvecoEmoji(reaction)
             checkManEmoji(reaction)
             checkMercedesEmoji(reaction)
-            // checkRenaultEmoji(reaction)
-            //checkPilotEmoji(reaction)
+            checkRenaultEmoji(reaction)
         }
     })
 
@@ -747,7 +768,7 @@ client.on('ready', () =>{
 
         let react = [emoji_truck, emoji_pilot]
 
-        let react_prod = [emoji_scania, emoji_volvo, emoji_daf, emoji_man, emoji_mercedes]
+        let react_prod = [emoji_scania, emoji_volvo, emoji_daf, emoji_man, emoji_mercedes, emoji_renault]
 
         let embed_prod = new Discord.MessageEmbed()
         .setColor('#00c3ff')
@@ -782,7 +803,7 @@ client.on('ready', () =>{
     command(client, 'ciezarowka', message => {
         message.delete({timeout: 100})
 
-        let react = [emoji_scania, emoji_volvo, emoji_daf, emoji_man, emoji_mercedes]
+        let react = [emoji_scania, emoji_volvo, emoji_daf, emoji_man, emoji_mercedes, emoji_renault]
 
         let embed = new Discord.MessageEmbed()
         .setColor('#00c3ff')
